@@ -1,6 +1,7 @@
 **/__pycache__/
 
 data/datasets
+data/slurm_log
 
 quantization/clip_cache/
 
@@ -10,7 +11,7 @@ test/humaneval/preds/
 train/ckpts/
 train/logs/
 
-data/
+# data/
 
 inference/quant_cache/
 
