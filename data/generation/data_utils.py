@@ -85,6 +85,8 @@ def get_gen_dataset(dataset_name, max_sample=None, tokenizer=None):
         return get_math_dataset(max_sample, tokenizer)
     elif dataset_name == "HK_yue_qa":
         return get_HK_yue_dataset(max_sample, tokenizer)
+    elif dataset_name == "HK_yue_qa2":
+        return get_HK_yue2_dataset(max_sample, tokenizer)
     else:
         raise ValueError(f"{dataset_name} not implement yet")
 
@@ -232,6 +234,19 @@ def get_HK_yue_dataset(max_sample, tokenizer):
 
     sources = [
         prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
+        for example in hk_yue_dataset
+    ]
+    targets = [f"{example['response']}{tokenizer.eos_token}" for example in hk_yue_dataset]
+
+    return extract_random_dataset(sources, targets, max_sample)
+
+def get_HK_yue2_dataset(max_sample, tokenizer):
+    hk_yue_dataset = load_dataset("/aifs4su/gov/models/HK_yue_qa2", split='train')
+    prompt_input, prompt_no_input = HK_YUE_PROMPT_DICT["prompt_input"], HK_YUE_PROMPT_DICT["prompt_no_input"]
+
+    sources = [
+        # prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
+        prompt_no_input.format_map(example)
         for example in hk_yue_dataset
     ]
     targets = [f"{example['response']}{tokenizer.eos_token}" for example in hk_yue_dataset]
