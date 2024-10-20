@@ -1,7 +1,7 @@
 export MODEL_PATH='/aifs4su/gov/models/Qwen2-1.5B-Instruct'
 export DATA_PATH=
 export SAVE_PATH='/aifs4su/gov/models/Qwen2-1.5B-Instruct-baichuan-distill'
-export LOGGING_PATH='/home/lilujun/workspace/BitDistiller/train/logs/Qwen2-1.5B-Instruct/int2-g128/'
+export LOGGING_PATH='/home/lilujun/workspace/BitDistiller/train/logs/Qwen2-1.5B-Instruct/int3-g128/'
 export EPOCHS=4
 
 
@@ -13,10 +13,10 @@ export WANDB_DISABLED=true
 export NCCL_P2P_DISABLE=1 
 export NCCL_IB_DISABLE=1
 
-deepspeed --num_gpus=8 train.py \
+CUDA_VISIBLE_DEVICES=0,1,2,3 deepspeed --num_gpus=4 train.py \
     --model_name_or_path $MODEL_PATH \
     --data_path $DATA_PATH \
-    --model_max_length 512 \
+    --model_max_length 1024 \
     --output_dir $SAVE_PATH \
     --logging_dir $LOGGING_PATH \
     --num_train_epochs $EPOCHS \
@@ -38,10 +38,10 @@ deepspeed --num_gpus=8 train.py \
     --logging_steps 1 \
     --report_to "tensorboard" \
     --deepspeed config/zero.json \
-    --bits 2 \
-    --quant_type int2-asym \
+    --bits 3 \
+    --quant_type int3-asym \
     --q_group_size 128 \
     --train_kd True \
     --kd_loss_type 'cakld' \
     --max_train_samples 999999 \
-    --clip /home/lilujun/workspace/BitDistiller/quantization/clip_cache/Qwen2-1.5B-Instruct/int2-g128.pt
+    --clip /home/lilujun/workspace/BitDistiller/quantization/clip_cache/Qwen2-1.5B-Instruct/int3-g128.pt

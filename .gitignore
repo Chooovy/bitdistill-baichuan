@@ -3,7 +3,7 @@
 data/datasets
 data/slurm_log
 
-quantization/clip_cache/
+# quantization/clip_cache/
 
 test/gsm8k/preds/
 test/humaneval/preds/

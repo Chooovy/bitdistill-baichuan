@@ -71,7 +71,7 @@ class TrainingArguments(transformers.TrainingArguments):
     )
     overwrite_output_dir: bool = field(default=False)
     bits: int = field(
-        default=2,
+        default=3,
         metadata={"help": "How many bits to use."}
     )
     q_group_size: int = field(

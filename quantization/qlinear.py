@@ -55,8 +55,10 @@ class QLinear(nn.Linear):
             self.weight_quantizer = SteN2F3Quantizer(q_group_size=q_group_size)
         elif quant_type == "int2-asym":
             self.weight_quantizer = SteInt2AsymQuantizer(q_group_size=q_group_size)
+        elif quant_type == "int3-asym":
+            self.weight_quantizer = SteInt3AsymQuantizer(q_group_size=q_group_size)
         else:
-            raise ValueError(f"Has no support {quant_type}. Valid quant_type:[ste-n2f3, int2-asym]")
+            raise ValueError(f"Has no support {quant_type}. Valid quant_type:[ste-n2f3, int2-asym, int3-asym]")
         # self.quant_type = quant_type
         self.compute_dtype = compute_dtype
 

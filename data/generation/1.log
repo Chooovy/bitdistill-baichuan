@@ -1,0 +1,176 @@
+root@dgx-004:/workspace/bitdistill-baichuan/data/generation# bash generate_vllm.sh
+dir /aifs4su/gov/models/baichuan-moe-hf-128k-chat-guhao-HKyue-dataset-output has existed
+using 4 GPUs to generate
+2024-10-20 10:26:51,309 INFO worker.py:1752 -- Started a local Ray instance.
+INFO 10-20 10:26:52 llm_engine.py:75] Initializing an LLM engine (v0.4.0) with config: model='/aifs4su/gov/models/baichuan-moe-hf-128k-chat-guhao', tokenizer='/aifs4su/gov/models/baichuan-moe-hf-128k-chat-guhao', tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=6144, download_dir=None, load_format=auto, tensor_parallel_size=4, disable_custom_all_reduce=True, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, seed=0)
+WARNING 10-20 10:26:53 tokenizer.py:104] Using a slow tokenizer. This might cause a significant slowdown. Consider using a fast tokenizer instead.
+INFO 10-20 10:27:08 selector.py:16] Using FlashAttention backend.
+(RayWorkerVllm pid=78264) INFO 10-20 10:27:09 selector.py:16] Using FlashAttention backend.
+INFO 10-20 10:27:10 pynccl_utils.py:45] vLLM is using nccl==2.18.1
+(RayWorkerVllm pid=78264) INFO 10-20 10:27:10 pynccl_utils.py:45] vLLM is using nccl==2.18.1
+(RayWorkerVllm pid=78264) INFO 10-20 10:29:42 model_runner.py:104] Loading model weights took 49.2835 GB
+(RayWorkerVllm pid=78717) INFO 10-20 10:27:09 selector.py:16] Using FlashAttention backend. [repeated 2x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/ray-logging.html#log-deduplication for more options.)
+(RayWorkerVllm pid=78717) INFO 10-20 10:27:10 pynccl_utils.py:45] vLLM is using nccl==2.18.1 [repeated 2x across cluster]
+INFO 10-20 10:30:08 model_runner.py:104] Loading model weights took 49.2835 GB
+INFO 10-20 10:30:16 ray_gpu_executor.py:240] # GPU blocks: 2976, # CPU blocks: 780
+INFO 10-20 10:30:20 model_runner.py:791] Capturing the model for CUDA graphs. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI.
+INFO 10-20 10:30:20 model_runner.py:795] CUDA graphs can take additional 1~3 GiB memory per GPU. If you are running out of memory, consider decreasing `gpu_memory_utilization` or enforcing eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+(RayWorkerVllm pid=78264) INFO 10-20 10:30:20 model_runner.py:791] Capturing the model for CUDA graphs. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI.
+(RayWorkerVllm pid=78264) INFO 10-20 10:30:20 model_runner.py:795] CUDA graphs can take additional 1~3 GiB memory per GPU. If you are running out of memory, consider decreasing `gpu_memory_utilization` or enforcing eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage.
+(RayWorkerVllm pid=78717) INFO 10-20 10:29:42 model_runner.py:104] Loading model weights took 49.2835 GB [repeated 2x across cluster]
+(RayWorkerVllm pid=78264) INFO 10-20 10:30:27 model_runner.py:867] Graph capturing finished in 7 secs.
+(RayWorkerVllm pid=78717) INFO 10-20 10:30:20 model_runner.py:791] Capturing the model for CUDA graphs. This may lead to unexpected consequences if the model is not static. To run the model in eager mode, set 'enforce_eager=True' or use '--enforce-eager' in the CLI. [repeated 2x across cluster]
+(RayWorkerVllm pid=78717) INFO 10-20 10:30:20 model_runner.py:795] CUDA graphs can take additional 1~3 GiB memory per GPU. If you are running out of memory, consider decreasing `gpu_memory_utilization` or enforcing eager mode. You can also reduce the `max_num_seqs` as needed to decrease memory usage. [repeated 2x across cluster]
+INFO 10-20 10:30:27 model_runner.py:867] Graph capturing finished in 7 secs.
+The repository for /aifs4su/gov/models/baichuan-moe-hf-128k-chat-guhao contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co//aifs4su/gov/models/baichuan-moe-hf-128k-chat-guhao.
+You can avoid this prompt in future by passing the argument `trust_remote_code=True`.
+
+Do you wish to run the custom code? [y/N] y
+only use 15 samples
+提供一個字典條目例子，其中包含一個粵語詞匯及其解釋、英文定義以及普通話解釋。此詞匯“計算機科學”，涉及科技和信息領域，其英文對應詞為“computer science”。普通話中稱為“計算機科學”。
+ 提供一個字典例句，包括廣東話詞彙與解釋、英文解釋以及普通話解釋。該詞彙是「糖水」，廣東話裡指一種甜湯或甜飲料，常作為甜點或解渴飲用。英文解釋應為 "sweet soup" 或 "dessert soup"。普通話解釋應用簡體字提供。
+ 創造一個新的詞彙條目，詞彙為「書蟲」，表示熱愛閱讀並花大量時間在書籍上的人。請用粵語和普通話提供完整定義，並將相關解釋翻譯成英語。
+
+Processed prompts: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:25<00:00,  1.67s/it]
+
+給出字典條目的範例：
+
+**計算機科學**
+* 粵語：計機科學
+* 英文名稱：Computer Science
+* 普通話：計算機科學
+
+**定義**
+* 計算機科學是關於計算和計算基礎的科學，包括理論、設計、開發和使用計算系統。
+* 計算機科學是一門研究計算機系統和計算過程的科學，包括計算機硬件和軟件、計算理論、算法及數據結構等。
+* 計算機科學是一門涉及計算和計算機系統的科學，包括計算機硬件、軟件和計算理論。
+* 計算機科學是一門研究計算機系統及計算過程的科學，包括計算機軟件、硬件以及計算理論。
+
+**英文定義**
+* Computer science is the study of computers and computational systems. It involves the theoretical foundations of information and computation, as well as practical techniques for their implementation and application in computer systems.
+* Computer science is the scientific and practical approach to computation and its applications. It involves the study of algorithms, data structures, and the design and implementation of computer programs and systems.
+* Computer science is an academic field that encompasses the theory, experimentation, and engineering that form the basis for the design and use of computers.
+* Computer science is a discipline that deals with the study of computers and computational systems. It encompasses the theoretical foundations of information and computation, as well as the practical aspects of designing and building computer systems.
+
+**普通話定義**
+* 計算機科學是研究計算機和計算系統的科學。它涉及信息和計算理論的基礎，以及計算機系統的實施和應用。
+* 計算機科學是一種科學和實用的方法，用於計算及其應用。它涉及算法、數據結構的研究，以及計算機程序和系統的設計和實施。
+* 計算機科學是一門學科，涉及計算機和計算系統的研究。它包括信息和計算理論的理論基礎，以及設計和建立計算機系統的實用方面。
+* 計算機科學是涉及計算機和計算系統研究的學科。它包括信息和計算理論的理論基礎，以及設計和建立計算機系統的實用方面。
+
+糖水 (Cantonese: tong4 sui2)
+- 廣東話詞彙：糖水
+- 英文解釋：sweet soup / dessert soup
+- 普通話解釋：糖水
+
+例句：
+- 廣東話：我今日食咗好多嘢，好滯，想飲杯糖水解下滯。
+- 英文：I ate a lot today, I feel bloated, I want to drink a cup of sweet soup to relieve the bloating.
+- 普通話：我今天吃了很多东西，感觉有点撑，想喝杯糖水解解腻。
+
+書蟲(書蟲)：一種熱愛閱讀並花大量時間在書籍上的人。他們通常對閱讀有著極高的興趣和熱情，並且總是想盡辦法找時間來閱讀。書蟲們可能會在任何地方閱讀，無論是在公共交通工具上、在咖啡館裡，還是在床上。他們閱讀的範圍也非常廣泛，包括文學、歷史、科學等各個領域。對於書蟲來說，閱讀已經成為了他們生活的一部分，他們通過閱讀來學習、探索和享受。
+
+Cantonese: (書蟲) sik-cung: yat-jung hot-oi-yim-mak jung joi-daai-hoi-si-ging syu-ging-dik. Heung-dung joi-dik-dou yau-hai-gae-ji-gok-hing-mou-mou-hing, jung bat-jung-faat-si-hing-joi-siu-wai-kui-hing. Sik-cung-dik yau-jai-hing-hoi-hing-hing, jung-dik wui-dung-do-ding-tung-bung-gwo-si-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Sik-cung-dik jung-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si-hing-hing-joi-siu-wai-kui-hing. Siu-hing-hing-dik joi-dik-dou yau-jai-hing-hing-hing, jung-dung si
+
+1. 短語：?到足
+粵語解釋：?到足這個短語形容一個人非常會招待客人，讓客人感到舒適和受重視。
+英語定義：「Rolls out the red carpet」is an idiom that means to welcome someone very warmly and generously, as if rolling out a red carpet for them.
+普通話解釋：?到足這個短語形容一個人對待客人非常周到，把客人當作貴賓一般款待。
+
+字典條目示例：
+
+廣東話詞彙：收皮
+廣東話解釋：「收皮」在廣東話中是一個粗俗的口語表達，通常表示讓某人停止做某事，或者讓某人離開。這個詞彙有侮辱的含義，所以不應該在不恰當的場合使用。
+英文定義：“Shut up” or “Go away” in Cantonese, often used as a rude or insulting expression to tell someone to stop doing something or to leave.
+普通話解釋：「收皮」在標準普通話中相當於「閉嘴」或「滾蛋」，是一種粗俗的口語表達，通常用來讓某人停止說話或離開。
+
+請注意，由於「收皮」是一個粗俗的口語表達，因此在正式或文雅的環境中不建議使用。
+
+俗語：「忙到七彩」
+廣東話解釋：形容一個人非常忙碌，忙得應接不暇，無法處理所有的事情。
+英文解釋：Extremely busy, with too many things to deal with and feeling overwhelmed.
+普通話解釋：忙到不知所措，無法應對所有的事情。
+
+例如：
+| 粵語        | 粵語解釋       | English       | 普通話       |
+| ----------- | -------------- | ------------- | ------------ |
+| 芝士        | 乳酪/起司       | Cheese        | 奶酪/芝士     |
+| 芝士火腿三文治  | 含有芝士和火腿的三明治 | Cheese and Ham Sandwich | 奶酪火腿三明治 |
+| 芝士蛋糕     | 含有芝士的蛋糕   | Cheese Cake   | 奶酪蛋糕     |
+| 芝士波浪脆   | 芝士口味的薯片   | Cheese Wave   | 奶酪波浪脆   |
+
+Cantonese Expression: 冇計 (móuh gai)
+Explanation in Cantonese: "冇" means 'no', and "計" means 'plan' or 'trick'. So, the phrase '冇計' literally means 'no plan' or 'no trick'. It is used to express a situation where there are no viable options or solutions to a problem.
+Equivalent Meaning in Mandarin: 没办法 (méi bàn fǎ)
+English Definition: The expression "冇計" conveys that one is out of options or has exhausted all possibilities. It implies a sense of helplessness or frustration when faced with an unsolvable problem or when all attempts to find a solution have failed.
+
+洗冷水面 (Cantonese)
+Literal Translation: Washing cold water noodles
+Figurative Meaning: To wash one's face with cold water in the morning, symbolizing facing reality with a clear and sober mind.
+
+洗冷水面 (Mandarin)
+Literal Translation: Washing cold water noodles
+Figurative Meaning: To wash one's face with cold water in the morning, symbolizing facing reality with a clear and sober mind.
+
+English Definition: To face reality with a clear and sober mind.
+
+吃飯 (chīfàn)
+1. 名词：吃飯是“品嘗食物”的簡稱。在粵語中，它通常與量詞“餐”一起出現。例如，“吃餐飯”(chīcānfàn)表示“吃飯”。
+2. 動詞：吃飯也可以作為動詞來使用，表示在餐廳或家中享用食物。
+
+英文定義：to have a meal
+
+注意：“吃飯”在普通話和粵語中都是一個常用詞語，但在不同地區可能有不同的用法。
+
+例子：
+
+粵語：
+食住 - sik6 zyu6
+行住 - hang4 zyu6
+
+普通話：
+吃 - chī
+住 - zhù
+
+英文：
+eating
+living
+
+"食住" 在粵語中表示正在持續進食，就像 "eating" 在英文中表示正在持續進食。"行住" 在粵語中表示正在持續行走，就像 "walking" 在英文中表示正在持續行走。"住" 在普通話中表示居住，而 "zhù" 是它的拼音，這在普通話和拼音中是一樣的。
+
+詞彙：「唔該」
+解釋：請求或感謝的詞彙，相當於英文的 "please" 或 "thank you"。
+翻譯：
+- 英文：please/thank you
+- 普通話：請/謝謝
+
+---
+
+**走火入魔** (zau2 h?t3 jap6 mok6)
+- 粵語解釋：這個成語通常是指一個人對某件事情十分狂熱，沉迷其中，到了失去理智、失去自我控制的程度。在武俠小說或電視劇中，這個詞常用來形容練武過於入迷，以至於出現精神錯亂的情況。
+- 英文定義：Obsession; to be so obsessed with something that one loses touch with reality.
+- 普通話解釋：入迷;沉迷於某事物到達失去理智的地步。
+
+例如：
+- 粵語例句：佢最近練緊個新技能，我擔心佢會唔會走火入魔。
+- 英文譯文：He has been practicing a new skill recently, and I am worried that he might become obsessed with it.
+- 普通話例句：他最近一直在練習一個新技能，我擔心他會不會入迷。
+
+
+詞條例子：
+
+**附屬公司**
+
+* 粵語解釋：附屬公司是一個從屬於另一個較大公司或母公司的獨立法人實體。在企業結構中，附屬公司通常具有自己的管理架構、業務運作和財務報告。母公司和附屬公司之間可能存在股份所有權和資金關係，但附屬公司有自己的股東並可自主經營。附屬公司在金融及商業界中扮演重要角色，如擴大市場份額、降低風險、提供不同市場的產品和服務等。
+
+* 英文定義：A subsidiary is a company that is owned or controlled by another company, known as the parent company. A subsidiary can be a separate legal entity with its own management, operations, and financial statements, but its parent company holds a majority stake in its ownership and may exert control over its policies and practices. Subsidiaries play a significant role in the financial and business sectors, such as market expansion, risk diversification, and provision of products and services across different markets.
+
+* 普通話解釋：附屬公司是一家由母公司擁有或控制的公司，可以是一個獨立的法人實體，擁有自己的管理層、業務運作和財務報表。附屬公司在金融和商業領域發揮著重要作用，例如擴大市場份額、降低風險和提供不同市場的產品和服務。
+
+這組字典條目例子應該包括：
+
+- 粵語詞彙：食得鹹魚淡得渴
+- 粵語解釋：形容能夠忍受一時的不適，以換取長久的利益
+- 英文定義：a willingness to endure short-term discomfort for long-term benefits
+- 普通話解釋：能夠忍受一時的不適，以換取長久的利益
+(RayWorkerVllm pid=78603) INFO 10-20 10:30:27 model_runner.py:867] Graph capturing finished in 7 secs. [repeated 2x across cluster]
