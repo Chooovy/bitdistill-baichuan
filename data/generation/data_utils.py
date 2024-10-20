@@ -249,6 +249,6 @@ def get_HK_yue2_dataset(max_sample, tokenizer):
         prompt_no_input.format_map(example)
         for example in hk_yue_dataset
     ]
-    targets = [f"{example['response']}{tokenizer.eos_token}" for example in hk_yue_dataset]
+    targets = [f"{example['output']}{tokenizer.eos_token}" for example in hk_yue_dataset]
 
     return extract_random_dataset(sources, targets, max_sample)
