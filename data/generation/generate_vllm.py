@@ -27,7 +27,7 @@ def main(args):
     for output in outputs:
         all_outputs.append([[output.prompt, output.outputs[0].text]])
 
-    with open(args.out_path + f'/{args.dataset_name}_T{args.temperature}_N{args.max_new_tokens}_S{args.seed}_{args.max_sample}.json', 'w') as f:
+    with open(args.out_path + f'/{args.dataset_name}_T{args.temperature}_N{args.max_new_tokens}_S{args.seed}_{args.max_sample}.json', 'w', encoding='utf-8') as f:
         for item in all_outputs[:len(outputs)]:
             f.write(json.dumps(item) + '\n')
 
