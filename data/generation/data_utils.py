@@ -55,6 +55,14 @@ MATH_PROMPT_DICT = {
     )
 }
 
+HK_YUE_PROMPT_DICT = {
+    "prompt_input": (
+        "{instruction}\n{input}\n"
+    ),
+    "prompt_no_input": (
+        "{instruction}\n"
+    ),
+}
 
 
 
@@ -75,6 +83,8 @@ def get_gen_dataset(dataset_name, max_sample=None, tokenizer=None):
         return get_code_dataset(max_sample, tokenizer)
     elif dataset_name == "math":
         return get_math_dataset(max_sample, tokenizer)
+    elif dataset_name == "HK_yue_qa":
+        return get_HK_yue_dataset(max_sample, tokenizer)
     else:
         raise ValueError(f"{dataset_name} not implement yet")
 
@@ -110,7 +120,7 @@ def get_wiki_dataset(max_sample):
 
 def get_redpajama_dataset(max_sample):
     # wiki_dataset = load_dataset("wikitext", 'wikitext-2-raw-v1', split='train')
-    wiki_dataset = load_dataset('/root/model/datasets/RedPajama-Data-1T-Sample', split='train')
+    wiki_dataset = load_dataset('togethercomputer/RedPajama-Data-1T', split='train')
 
     wiki_long = []
     for text in wiki_dataset['text']:
@@ -211,5 +221,19 @@ def get_math_dataset(max_sample, tokenizer):
     sources = [prompt_no_input.format_map(example) for example in math_dataset]
 
     targets = [f"{example['response']}{tokenizer.eos_token}" for example in math_dataset]
+
+    return extract_random_dataset(sources, targets, max_sample)
+
+
+def get_HK_yue_dataset(max_sample, tokenizer):
+    hk_yue_dataset = load_dataset("/aifs4su/gov/models/HK_yue", split='train')
+    # math_dataset = load_dataset('json', data_files="/root/model/acr_duda/gsm8k/data/MetaMath-40K.json", split='train')
+    prompt_input, prompt_no_input = HK_YUE_PROMPT_DICT["prompt_input"], HK_YUE_PROMPT_DICT["prompt_no_input"]
+
+    sources = [
+        prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
+        for example in hk_yue_dataset
+    ]
+    targets = [f"{example['response']}{tokenizer.eos_token}" for example in hk_yue_dataset]
 
     return extract_random_dataset(sources, targets, max_sample)

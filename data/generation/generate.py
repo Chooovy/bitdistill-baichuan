@@ -159,10 +159,10 @@ def main(rank, args):
 
     model = AutoModelForCausalLM.from_pretrained(
             base_model,
-            torch_dtype=torch.bfloat16
+            torch_dtype=torch.bfloat16, trust_remote_code=True
         )
     
-    tokenizer = AutoTokenizer.from_pretrained(base_model, use_fast=False)
+    tokenizer = AutoTokenizer.from_pretrained(base_model, use_fast=False, trust_remote_code=True)
     tokenizer.truncation_side = 'left'
     if tokenizer.pad_token is None:
         smart_tokenizer_and_embedding_resize(

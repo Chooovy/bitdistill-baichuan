@@ -156,10 +156,10 @@ def main(args):
     model = AutoModelForCausalLM.from_pretrained(
             base_model,
             torch_dtype=torch.bfloat16,
-            device_map='auto'
+            device_map='auto', trust_remote_code=True
         )
     
-    tokenizer = AutoTokenizer.from_pretrained(base_model, use_fast=False)
+    tokenizer = AutoTokenizer.from_pretrained(base_model, use_fast=False, trust_remote_code=True)
     if tokenizer.pad_token is None:
         smart_tokenizer_and_embedding_resize(
             special_tokens_dict=dict(pad_token=DEFAULT_PAD_TOKEN),
@@ -212,8 +212,9 @@ def main(args):
             for i in range(return_seq_num):
                 temp.append([inputs_string[idx], outputs_string[return_seq_num*idx+i].replace(inputs_string[idx], '')])
             all_outputs.append(temp)
+            # print(all_outputs)
 
-    with open(args.out_path + f'/{args.dataset_name}_T{args.temperature}_N{args.max_new_tokens}_S{args.seed}_{args.max_sample}.json', 'w') as f:
+    with open(args.out_path + f'/{args.dataset_name}_T{args.temperature}_N{args.max_new_tokens}_S{args.seed}_{args.max_sample}.json', 'w', encoding='utf-8') as f:
         for item in all_outputs[:len(gen_dataset)]:
             f.write(json.dumps(item) + '\n')
 

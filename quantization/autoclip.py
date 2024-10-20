@@ -44,7 +44,7 @@ def auto_2clip_layer(w, input_feat, n_bit, q_config,
 
         min_errs = torch.ones_like(org_max_val) * 1e9
         input_feat = input_feat.to(w.device)
-        org_out = (input_feat * w).sum(dim=-1)  # co, n_token, n_group
+        org_out = (input_feat * w).sum(dim=-1).to(w.device)  # co, n_token, n_group
 
         for i_s_p in range(int(max_shrink * n_grid)):
             max_val = org_max_val * (1 - i_s_p / n_grid)
@@ -60,7 +60,7 @@ def auto_2clip_layer(w, input_feat, n_bit, q_config,
                     quant_type = q_config["quant_type"]
                     raise ValueError(f"Has no support {quant_type}. Valid quant_type:[int, nf3]")
                     
-                cur_out = (input_feat * q_w).sum(dim=-1)
+                cur_out = (input_feat * q_w).sum(dim=-1).to(w.device)
 
                 err = (cur_out - org_out).pow(2).mean(dim=1).view(min_errs.shape)
 
@@ -116,7 +116,7 @@ def run_clip(
     print(f"Using {datasets} dataset to do calibation")
     samples = get_calib_dataset(
               datasets=datasets, tokenizer=enc, n_samples=n_samples, block_size=seqlen)
-    samples = torch.cat(samples, dim=0)
+    samples = torch.cat(samples, dim=0).to(next(model.parameters()).device)  # Move samples to the same device as the model
 
     inps = []
     layer_kwargs = {}
@@ -168,6 +168,7 @@ def run_clip(
         # firstly, get input features of all linear layers
         def cache_input_hook(m, x, y, name, feat_dict):
             x = x[0]
+            x = x.to(next(m.parameters()).device)  # Move to the same device as the module
             x = x.detach().cpu()
             feat_dict[name].append(x)
 

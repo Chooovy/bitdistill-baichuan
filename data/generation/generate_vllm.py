@@ -12,7 +12,7 @@ def main(args):
     n_gpus = torch.cuda.device_count()
     print(f"using {n_gpus} GPUs to generate")
 
-    model = LLM(model=args.base_model, tensor_parallel_size=n_gpus)
+    model = LLM(model=args.base_model, tensor_parallel_size=n_gpus, trust_remote_code=True)
 
     tokenizer = AutoTokenizer.from_pretrained(args.base_model, use_fast=False)
 

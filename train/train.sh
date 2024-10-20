@@ -1,5 +1,10 @@
-export MODEL_PATH='/data/lujunli/hf_download/tinyllama-1b'
-export SAVE_PATH=$2
+export MODEL_PATH='/aifs4su/gov/models/Qwen2-1.5B-Instruct'
+export DATA_PATH=
+export SAVE_PATH='/aifs4su/gov/models/Qwen2-1.5B-Instruct-baichuan-distill'
+export LOGGING_PATH='/home/lilujun/workspace/BitDistiller/train/logs/Qwen2-1.5B-Instruct/int2-g128/'
+export EPOCHS=4
+
+
 export MASTER_ADDR="localhost"
 export MASTER_PORT="1321"
 export GLOO_SOCKET_IFNAME="lo"
@@ -10,11 +15,11 @@ export NCCL_IB_DISABLE=1
 
 deepspeed --num_gpus=8 train.py \
     --model_name_or_path $MODEL_PATH \
-    --data_path $1 \
+    --data_path $DATA_PATH \
     --model_max_length 512 \
     --output_dir $SAVE_PATH \
-    --logging_dir $3 \
-    --num_train_epochs $4 \
+    --logging_dir $LOGGING_PATH \
+    --num_train_epochs $EPOCHS \
     --bf16 True \
     --seed 42 \
     --per_device_train_batch_size 1 \
@@ -37,6 +42,6 @@ deepspeed --num_gpus=8 train.py \
     --quant_type int2-asym \
     --q_group_size 128 \
     --train_kd True \
-    --kd_loss_type "cakld" \
+    --kd_loss_type 'cakld' \
     --max_train_samples 999999 \
-    --clip ~/pprp/BitDistiller/quantization/clip_cache/hf-llama-1b/int2-g128.pt
+    --clip /home/lilujun/workspace/BitDistiller/quantization/clip_cache/Qwen2-1.5B-Instruct/int2-g128.pt
